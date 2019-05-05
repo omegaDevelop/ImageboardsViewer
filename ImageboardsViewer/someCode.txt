@@ -271,3 +271,83 @@ if (dirInfo.Exists && Directory.Exists(newPath) == false)
     dirInfo.MoveTo(newPath);
 }
 При перемещении надо учитывать, что новый каталог, в который мы хотим перемесить все содержимое старого каталога, не должен существовать.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*PictureBox pictureBox1;
+            int w = 0, h = 0;
+            int sizePicBox = panel1.Width/3;
+            int columnPicsCount = panel1.Width / 200;
+            for (int i = 0; i < IMAGES_COUNT_ON_PAGE; i++)  
+            {
+                pictureBox1 = new PictureBox
+                {
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    BackColor = Color.Thistle,
+                    Location = new System.Drawing.Point(w * 200, h * 200),
+                    Size = new System.Drawing.Size(195, 195),
+                    Name = i.ToString()
+                };
+                pictureBox1.DoubleClick += new EventHandler(PictureBox_DoubleClick);
+                panel1.Controls.Add(pictureBox1);
+                if (w > columnPicsCount-2)
+                {
+                    w = 0;
+                    h++;
+                }
+                else w++;
+            }*/
+
+
+
+
+
+
+
+
+
+
+
+			 /*for (int i = 0; i < IMAGES_COUNT_ON_PAGE; i++)
+            {
+                var lockat = ((PictureBox)panel1.Controls[i]).Location;
+                if (i < tbibParser.GetImagesCount())
+                {
+                    ((PictureBox)panel1.Controls[i]).LoadAsync(tbibParser.GetImageThumbUrl(i));
+                    ((PictureBox)panel1.Controls[i]).Visible = true;
+
+                }
+                else ((PictureBox)panel1.Controls[i]).Visible = false;
+                ((PictureBox)panel1.Controls[i]).Location = lockat;
+            }*/
+
+
+
+
+
+
+
+
+
+
+			 NotifyIcon NI = new NotifyIcon
+                {
+                    BalloonTipText = "Нет уникальных изображений",
+                    BalloonTipTitle = "Поисковик",
+                    BalloonTipIcon = ToolTipIcon.Info,
+                    Icon = this.Icon,
+                    Visible = true
+                };
+                NI.ShowBalloonTip(1);

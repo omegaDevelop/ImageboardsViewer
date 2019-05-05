@@ -71,7 +71,7 @@
             this.buttonSaveTableToFile.TabIndex = 3;
             this.buttonSaveTableToFile.Text = "Save Table As TXT";
             this.buttonSaveTableToFile.UseVisualStyleBackColor = true;
-            this.buttonSaveTableToFile.Click += new System.EventHandler(this.buttonSaveTableToFile_Click);
+            this.buttonSaveTableToFile.Click += new System.EventHandler(this.ButtonSaveTableToFile_Click);
             // 
             // openFileDialog1
             // 
@@ -85,7 +85,7 @@
             this.buttonDeleteCopy.TabIndex = 6;
             this.buttonDeleteCopy.Text = "Delete dublicate from table";
             this.buttonDeleteCopy.UseVisualStyleBackColor = true;
-            this.buttonDeleteCopy.Click += new System.EventHandler(this.buttonDeleteCopy_Click);
+            this.buttonDeleteCopy.Click += new System.EventHandler(this.ButtonDeleteCopy_Click);
             // 
             // checkBoxImageZoom
             // 
@@ -98,7 +98,7 @@
             this.checkBoxImageZoom.TabIndex = 7;
             this.checkBoxImageZoom.Text = "Zoom Full Image";
             this.checkBoxImageZoom.UseVisualStyleBackColor = true;
-            this.checkBoxImageZoom.CheckedChanged += new System.EventHandler(this.checkBoxImageZoom_CheckedChanged);
+            this.checkBoxImageZoom.CheckedChanged += new System.EventHandler(this.CheckBoxImageZoom_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -203,7 +203,7 @@
             this.buttonScanFolderName.TabIndex = 21;
             this.buttonScanFolderName.Text = "Add new artists from folders names";
             this.buttonScanFolderName.UseVisualStyleBackColor = true;
-            this.buttonScanFolderName.Click += new System.EventHandler(this.buttonScanFolderName_Click);
+            this.buttonScanFolderName.Click += new System.EventHandler(this.ButtonScanFolderName_Click);
             // 
             // SettingsForm
             // 

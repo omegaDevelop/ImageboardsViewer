@@ -71,7 +71,7 @@ namespace ImageboardsViewer
         {
             //получаю максимальное количество изображений   //допилить взять из тэгов
             IHtmlDocument webPage = new HtmlParser().Parse(HTMLDownloader
-               .GetContentByLink("http://tbib.org/index.php?page=post&s=list&tags=" + tagName + "&pid=0"));
+               .GetHTMLByUrl("https://tbib.org/index.php?page=post&s=list&tags=" + tagName + "&pid=0"));
 
             //у тега не всегда кол-во соответствует реальному - этот способ не стабилен
             // int searchTagCount = Convert.ToInt32(webPage.All.Where(m => (m.ClassName == "tag-type-general" | m.ClassName == "tag-type-artist") && m.Children.Count() > 2 && m.Children[2].TextContent == tagName).ElementAt(0).Children[3].TextContent);
@@ -96,7 +96,7 @@ namespace ImageboardsViewer
             for (int padeIndex = (startIndex/42)*42; padeIndex <= searchTagCount; padeIndex += 42)
             {
                 webPage = new HtmlParser().Parse(HTMLDownloader
-                .GetContentByLink("http://tbib.org/index.php?page=post&s=list&tags=" + tagName + "&pid=" + padeIndex));
+                .GetHTMLByUrl("https://tbib.org/index.php?page=post&s=list&tags=" + tagName + "&pid=" + padeIndex));
                 listItemsLinq = webPage.All.Where(m => m.ClassName == "preview");
                 //перебор картинок на одной странице
                 foreach (var imageItem in listItemsLinq)
@@ -104,7 +104,7 @@ namespace ImageboardsViewer
                     imageId = imageItem.Attributes.ElementAt(0).Value;  //.jpg?
                     imageId = imageId.Remove(0, imageId.IndexOf(".jpg?")+5);
                     //получил ссылку на кратинку
-                    imageThumbUrl = "http:" + imageItem.Attributes.ElementAt(0).Value;
+                    imageThumbUrl = "https:" + imageItem.Attributes.ElementAt(0).Value;
                     url = imageThumbUrl.Remove(imageThumbUrl.IndexOf('?'))
                                        .Replace("thumbnails", "images")
                                        .Replace("thumbnail_", "");

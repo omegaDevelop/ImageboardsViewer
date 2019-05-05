@@ -43,12 +43,12 @@ namespace ImageboardsViewer
             this.Hide();
         }
 
-        private void buttonSaveTableToFile_Click(object sender, EventArgs e)
+        private void ButtonSaveTableToFile_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void buttonDeleteCopy_Click(object sender, EventArgs e)
+        private void ButtonDeleteCopy_Click(object sender, EventArgs e)
         {
             TableName tn;
             if (comboBox1.SelectedItem.ToString() == TableName.artists.ToString()) tn = TableName.artists;
@@ -56,14 +56,14 @@ namespace ImageboardsViewer
             MessageBox.Show(string.Format("В таблице '{0}' найдено и удалено {1} похожих записей.", tn, SQLiteDBManager.DeleteCopy(tn)));
         }
 
-        private void checkBoxImageZoom_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxImageZoom_CheckedChanged(object sender, EventArgs e)
         {
             if (((CheckBox)sender).Checked == true) Properties.Settings.Default["FullImageSizeMode"] = PictureBoxSizeMode.Zoom;
             else Properties.Settings.Default["FullImageSizeMode"] = PictureBoxSizeMode.AutoSize;
             Properties.Settings.Default.Save(); 
         }
 
-        private void buttonScanFolderName_Click(object sender, EventArgs e)
+        private void ButtonScanFolderName_Click(object sender, EventArgs e)
         {
             DirectoryInfo dirInfo = new DirectoryInfo("tbib");
             DirectoryInfo[] di = dirInfo.GetDirectories();

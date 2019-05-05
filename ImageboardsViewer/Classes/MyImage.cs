@@ -18,8 +18,8 @@ namespace ImageboardsViewer
         public MyImage(string id, IElement imageItem)
         {
             Id = id;
-            PageUrl = "http://tbib.org/index.php?page=post&s=view&id=" + id;
-            ThumbUrl = "http:" + imageItem.Attributes.ElementAt(0).Value;
+            PageUrl = "https://tbib.org/index.php?page=post&s=view&id=" + id;
+            ThumbUrl = "https:" + imageItem.Attributes.ElementAt(0).Value;
             Url = ThumbUrl.Remove(ThumbUrl.IndexOf('?'))
                                .Replace("thumbnails", "images")
                                .Replace("thumbnail_", "");

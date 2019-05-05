@@ -25,7 +25,7 @@ namespace ImageboardsViewer
         public string[] GetTagCategorAndWeight(string tagName)
         {
             var document = new HtmlParser()
-               .Parse(HTMLDownloader.GetContentByLink("http://tbib.org/index.php?page=post&s=list&tags=" + tagName));
+               .Parse(HTMLDownloader.GetHTMLByUrl("https://tbib.org/index.php?page=post&s=list&tags=" + tagName));
             IEnumerable<IElement> listItemsLinq = document.All.
                Where(m => (m.ClassName == "tag-type-copyright"
                | m.ClassName == "tag-type-character"
@@ -56,12 +56,11 @@ namespace ImageboardsViewer
 
         private void LoadPageImagesFromWeb(string searchQuery, int pageIncrementValue, DataTable filtrateTags) //"tag1" or "tag1+tag+..etc"
         {
-
             Padeindex +=pageIncrementValue;
             ImagesList = new List<MyImage>();
             IHtmlDocument document = new HtmlParser()
                 .Parse(HTMLDownloader
-                .GetContentByLink("http://tbib.org/index.php?page=post&s=list&tags=" + searchQuery + "&pid=" + Padeindex));
+                .GetHTMLByUrl("https://tbib.org/index.php?page=post&s=list&tags=" + searchQuery + "&pid=" + Padeindex));
             IEnumerable<IElement> lastPageItems = document.All.Where(m => m.TextContent == ">>");
             if(lastPageItems.Count() > 0)
             {
@@ -114,7 +113,7 @@ namespace ImageboardsViewer
             else
             {
                 IHtmlDocument document = new HtmlParser()
-                .Parse(HTMLDownloader.GetContentByLink(ImagesList.ElementAt(imageIndex).PageUrl));
+                .Parse(HTMLDownloader.GetHTMLByUrl(ImagesList.ElementAt(imageIndex).PageUrl));
                 IEnumerable<IElement> listItemsLinq = document.All.
                    Where(m => m.ClassName == "tag-type-copyright tag"
                    | m.ClassName == "tag-type-character tag"
@@ -140,7 +139,8 @@ namespace ImageboardsViewer
         public int GetImagesCount() { return ImagesList.Count; }
         public int GetImageTagsCount(int imageIndex) { return ImagesList.ElementAt(imageIndex).TagsCount(); }
         public string GetImageUrl(int imageIndex) { return ImagesList.ElementAt(imageIndex).Url; }
-        public string GetImageThumbUrl(int imageIndex) { return ImagesList.ElementAt(imageIndex).ThumbUrl; }
+        public string GetImageThumbUrl(int imageIndex) {
+            return ImagesList.ElementAt(imageIndex).ThumbUrl; }
         public string GetImageId(int imageIndex) { return ImagesList.ElementAt(imageIndex).Id; }
         public string GetImageArtist(int imageIndex) { return ImagesList.ElementAt(imageIndex).Artist; }
        /* public string[] GetImageTag(int imageIndex, int tagIndex)
