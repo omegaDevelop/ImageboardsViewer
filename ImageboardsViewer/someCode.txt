@@ -1,0 +1,273 @@
+﻿class SampleRow
+    {
+        public string Name { get; set; } //обязательно нужно использовать get конструкцию
+        public float Price { get; set; }
+        public int Count { get; set; }
+
+        public string Hidden = ""; //Данное свойство не будет отображаться как колонка
+
+        public SampleRow(string name, float price, int count)
+        {
+            this.Name = name;
+            this.Price = price;
+            this.Count = count;
+        }
+    }
+Теперь мы можем написать следующий код в событии формы OnLoad:
+
+private void Form1_Load(object sender, EventArgs e)
+        {
+            BindingList<SampleRow> data = new BindingList<SampleRow>(); //Специальный список List с вызовом события обновления внутреннего состояния, необходимого для автообновления datagridview
+            data.Add(new SampleRow("Товар 1", 100, 1));
+            data.Add(new SampleRow("Товар 2", 200, 2));
+            data.Add(new SampleRow("Товар 3", 300, 3));
+
+            dataGridView1.DataSource = data;
+            data.Add(new SampleRow("Товар 4", 400, 4));
+      }
+
+
+
+
+
+
+
+
+	    BackgroundWorker bw = new BackgroundWorker();
+        bw.DoWork += bw_DoWork;
+        bw.RunWorkerAsync("Message to worker");
+
+	    void bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            dataGridViewArtists.Invoke(new Action(() => { dataGridViewArtists.Rows.Add(new string[] { list.ElementAt(i), res[0], res[1] }); }));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		Rectangle screenSize = System.Windows.Forms.Screen.PrimaryScreen.Bounds;Rectangle screenSize = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+         Screen.GetWorkingArea(this).Height/Width
+
+
+
+
+
+
+
+
+
+
+
+
+
+		 <?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="countoffiles" value="7" />
+    <add key="logfilelocation" value="abc.txt" />
+  </appSettings>
+</configuration>
+Вы читаете приведенные выше настройки приложения, используя следующий код:
+
+using System.Configuration;
+Вам также может потребоваться добавить ссылку на System.Configuration в вашем проекте, если ее еще нет. Затем вы можете получить доступ к таким значениям:
+
+string configvalue1 = ConfigurationManager.AppSettings["countoffiles"];
+string configvalue2 = ConfigurationManager.AppSettings["logfilelocation"];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+Для работы с каталогами в пространстве имен System.IO предназначены сразу два класса: Directory и DirectoryInfo.
+
+Класс Directory
+Класс Directory предоставляет ряд статических методов для управления каталогами. Некоторые из этих методов:
+
+CreateDirectory(path): создает каталог по указанному пути path
+
+Delete(path): удаляет каталог по указанному пути path
+
+Exists(path): определяет, существует ли каталог по указанному пути path. Если существует, возвращается true, если не существует, то false
+
+GetDirectories(path): получает список каталогов в каталоге path
+
+GetFiles(path): получает список файлов в каталоге path
+
+Move(sourceDirName, destDirName): перемещает каталог
+
+GetParent(path): получение родительского каталога
+
+Класс DirectoryInfo
+Данный класс предоставляет функциональность для создания, удаления, перемещения и других операций с каталогами. Во многом он похож на Directory. Некоторые из его свойств и методов:
+
+Create(): создает каталог
+
+CreateSubdirectory(path): создает подкаталог по указанному пути path
+
+Delete(): удаляет каталог
+
+Свойство Exists: определяет, существует ли каталог
+
+GetDirectories(): получает список каталогов
+
+GetFiles(): получает список файлов
+
+MoveTo(destDirName): перемещает каталог
+
+Свойство Parent: получение родительского каталога
+
+Свойство Root: получение корневого каталога
+
+Посмотрим на примерах применение этих классов
+
+Получение списка файлов и подкаталогов
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+string dirName = "C:\\";
+ 
+if (Directory.Exists(dirName))
+{
+    Console.WriteLine("Подкаталоги:");
+    string[] dirs = Directory.GetDirectories(dirName);
+    foreach (string s in dirs)
+    {
+        Console.WriteLine(s);
+    }
+    Console.WriteLine();
+    Console.WriteLine("Файлы:");
+    string[] files = Directory.GetFiles(dirName);
+    foreach (string s in files)
+    {
+        Console.WriteLine(s);
+    }
+}
+Обратите внимание на использование слешей в именах файлов. Либо мы используем двойной слеш: "C:\\", либо ординарный, но тогда перед всем путем ставим знак @: @"C:\Program Files"
+
+Создание каталога
+1
+2
+3
+4
+5
+6
+7
+8
+string path = @"C:\SomeDir";
+string subpath = @"program\avalon";
+DirectoryInfo dirInfo = new DirectoryInfo(path);
+if (!dirInfo.Exists)
+{
+    dirInfo.Create();
+}
+dirInfo.CreateSubdirectory(subpath);
+Вначале проверяем, а нету ли такой директории, так как если она существует, то ее создать будет нельзя, и приложение выбросит ошибку. В итоге у нас получится следующий путь: "C:\SomeDir\program\avalon"
+
+Получение информации о каталоге
+1
+2
+3
+4
+5
+6
+7
+8
+string dirName = "C:\\Program Files";
+ 
+DirectoryInfo dirInfo = new DirectoryInfo(dirName);
+ 
+Console.WriteLine("Название каталога: {0}", dirInfo.Name); 
+Console.WriteLine("Полное название каталога: {0}", dirInfo.FullName);
+Console.WriteLine("Время создания каталога: {0}", dirInfo.CreationTime);
+Console.WriteLine("Корневой каталог: {0}", dirInfo.Root);
+Удаление каталога
+Если мы просто применим метод Delete к непустой папке, в которой есть какие-нибудь файлы или подкаталоги, то приложение нам выбросит ошибку. Поэтому нам надо передать в метод Delete дополнительный параметр булевого типа, который укажет, что папку надо удалять со всем содержимым:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+string dirName = @"C:\SomeFolder";
+ 
+try
+{
+    DirectoryInfo dirInfo = new DirectoryInfo(dirName);
+    dirInfo.Delete(true);
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
+Или так:
+
+1
+2
+3
+string dirName = @"C:\SomeFolder";
+ 
+Directory.Delete(dirName, true);
+Перемещение каталога
+1
+2
+3
+4
+5
+6
+7
+string oldPath = @"C:\SomeFolder";
+string newPath = @"C:\SomeDir";
+DirectoryInfo dirInfo = new DirectoryInfo(oldPath);
+if (dirInfo.Exists && Directory.Exists(newPath) == false)
+{
+    dirInfo.MoveTo(newPath);
+}
+При перемещении надо учитывать, что новый каталог, в который мы хотим перемесить все содержимое старого каталога, не должен существовать.
